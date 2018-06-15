@@ -30,8 +30,34 @@ CustomSort.new(list,:size).then_by(vowels,:order => :asc).sort
  => ["One", "Ten", "Six", "Two", "Five", "Nine", "Four", "Seven", "Three", "Eight"] 
 ```
 
+When possible, any final ties are automatically broken using `<=>` on the elements themselves.
+
 ## Options
 
+The final `options` hash parameter accepts the following settings:
+
+`:order` as either `:asc` or `:desc`, specifying the search direction this criterion (default `:asc`).
+`:nulls` as either `:first` or `:last`, specifying whether nil-mapped entries occur at the end or beginning (default `:first`).
+
+Note that `:nulls` refers to null values in the criterion's map output, not the elements themselves. Nil entries in the original list must be handled manually.
+
+## Additional Notes
+
+You may wish to monkey-patch classes to make usage easier:
+
+```
+module Enumerable
+
+	def custom_sort_by(criterion, order = :asc)
+		CustomSort.new(self,criterion,order)
+	end
+
+end
+```
+
+Now we can just say:
+
+```list.custom_sort_by(:size,:order => :desc).sort````
 
 ## License
 
