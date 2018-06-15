@@ -25,9 +25,9 @@ CustomSort.new(list,lambda{|d| d.size },:order => :asc).sort
 The mapping result should be sortable using `<=>`. Arbtirary number of tie-breakers can be specified using `then_by`:
 
 ```
-vowels = lambda { |s| s.chars.select{|c| %w(a i o u y).include?(c) }.size }
+vowels = lambda { |s| s.chars.select{|c| %w(a e i o u y).include?(c) }.size }
 CustomSort.new(list,:size).then_by(vowels,:order => :asc).sort
- => ["One", "Ten", "Six", "Two", "Five", "Nine", "Four", "Seven", "Three", "Eight"] 
+ => ["One", "Six", "Ten", "Two", "Five", "Four", "Nine", "Eight", "Seven", "Three"]  
 ```
 
 When possible, any final ties are automatically broken using `<=>` on the elements themselves.
