@@ -1,4 +1,4 @@
-class CustomSortBy::CustomSort
+class CustomSort
 
 	def initialize(list, expression, options = {})
 		@list = list
