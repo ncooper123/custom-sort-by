@@ -1,6 +1,6 @@
 # CustomSortBy
 
-This gem provides a class CustomSort that seeks to simulate SQL-style sorting for any type that responds to `sort_by`.
+This gem provides a class `CustomSort` that seeks to simulate SQL-style sorting for any type that responds to `sort_by`.
 
 ## Usage
 
