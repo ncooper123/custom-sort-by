@@ -49,8 +49,8 @@ You may wish to monkey-patch classes to make usage easier:
 ```
 module Enumerable
 
-	def custom_sort_by(criterion, order = :asc)
-		CustomSort.new(self,criterion,order)
+	def custom_sort_by(criterion, options = {})
+		CustomSort.new(self,criterion,options)
 	end
 
 end
