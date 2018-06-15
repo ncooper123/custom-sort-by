@@ -6,7 +6,7 @@ This gem provides a class CustomSort that seeks to simulate SQL-style sorting fo
 
 Suppose:
 
-`list = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]`
+```list = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]```
 
 We perform a custom sort by telling CustomSortBy what properties/methods of each object will be used to perform the sort. For example, to sort by string length:
 
@@ -37,6 +37,7 @@ When possible, any final ties are automatically broken using `<=>` on the elemen
 The final `options` hash parameter accepts the following settings:
 
 `:order` as either `:asc` or `:desc`, specifying the search direction this criterion (default `:asc`).
+
 `:nulls` as either `:first` or `:last`, specifying whether nil-mapped entries occur at the end or beginning (default `:first`).
 
 Note that `:nulls` refers to null values in the criterion's map output, not the elements themselves. Nil entries in the original list must be handled manually.
