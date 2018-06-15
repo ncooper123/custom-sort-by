@@ -1,38 +1,36 @@
-# Custom::Sort::By
+# CustomSortBy
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/custom/sort/by`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'custom-sort-by'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install custom-sort-by
+This gem provides a class CustomSort that seeks to simulate SQL-style sorting for any type that responds to `sort_by`.
 
 ## Usage
 
-TODO: Write usage instructions here
+Suppose:
 
-## Development
+`list = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]`
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+We perform a custom sort by telling CustomSortBy what properties/methods of each object will be used to perform the sort. For example, to sort by string length:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+``
+CustomSort.new(list,:size,:order => :desc).sort
+ => ["Eight", "Seven", "Three", "Five", "Four", "Nine", "One", "Six", "Ten", "Two"] 
+``
 
-## Contributing
+The search expression can be either a String/Symbol which will be invoked using `send`, or a lambda/Proc that specifies the mapping.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/custom-sort-by.
+```
+CustomSort.new(list,lambda{|d| d.size },:order => :asc).sort
+ => ["One", "Six", "Ten", "Two", "Five", "Four", "Nine", "Eight", "Seven", "Three"] 
+```
+
+The mapping result should be sortable using `<=>`. Arbtirary number of tie-breakers can be specified using `then_by`:
+
+```
+vowels = lambda { |s| s.chars.select{|c| %w(a i o u y).include?(c) }.size }
+CustomSort.new(list,:size).then_by(vowels,:order => :asc).sort
+ => ["One", "Ten", "Six", "Two", "Five", "Nine", "Four", "Seven", "Three", "Eight"] 
+```
+
+## Options
 
 
 ## License
