@@ -58,7 +58,7 @@ end
 
 Now we can just say:
 
-```list.custom_sort_by(:size,:order => :desc).sort````
+```list.custom_sort_by(:size,:order => :desc).sort```
 
 ## License
 
